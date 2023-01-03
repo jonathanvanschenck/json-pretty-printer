@@ -1,4 +1,4 @@
-#!/usr/bin/node
+#! /usr/bin/env node
 
 const { Parser, Renderer } = require("./index.js");
 
@@ -7,7 +7,7 @@ const VERSION = require("./package.json").version;
 const HELP = `Pretty printing for JSON strings
 
 USAGE:
-    jpp [JSON_STRING|options]
+    jsp [JSON_STRING|options]
 
 OPTIONS:
     -h,--help            Prints this help menu
