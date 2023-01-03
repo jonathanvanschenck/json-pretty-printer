@@ -1,25 +1,35 @@
 {
-  "name": "json-sp",
+  "name": "json-color-stream",
   "version": "1.0.0",
-  "description": "A pretty printer CLI tool for JSON strings",
+  "description": "A stream parser for pretty printing for JSON",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "lint": "npx eslint lib index.js cli.js || true",
+    "lint:fix": "npx eslint --fix lib index.js cli.js || true",
+    "build": "node scripts/build_docs.js"
   },
   "bin": {
-    "jsp2": "./cli.js"
+    "jcs": "./cli.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jonathanvanschenck/json-pretty-printer.git"
+    "url": "git+https://github.com/jonathanvanschenck/json-color-stream.git"
   },
   "author": "Jonathan D. B. Van Schenck",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/jonathanvanschenck/json-pretty-printer/issues"
+    "url": "https://github.com/jonathanvanschenck/json-color-stream/issues"
   },
-  "homepage": "https://github.com/jonathanvanschenck/json-pretty-printer#readme",
+  "homepage": "https://github.com/jonathanvanschenck/json-color-stream#readme",
   "dependencies": {
     "yaclc": "^1.0.0"
+  },
+  "devDependencies": {
+    "@babel/eslint-parser": "^7.19.1",
+    "@babel/preset-env": "^7.20.2",
+    "eslint": "^8.30.0",
+    "eslint-plugin-jsdoc": "^39.6.4",
+    "eslint-plugin-node": "^11.1.0",
+    "jsdoc-to-markdown": "^8.0.0"
   }
 }

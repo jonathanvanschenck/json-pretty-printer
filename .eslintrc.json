@@ -1,0 +1,37 @@
+{
+    "env": {
+        "browser": true,
+        "commonjs": true,
+        "es2021": true,
+        "mocha": true
+    },
+    "parser": "@babel/eslint-parser",
+    "extends": [
+        "eslint:recommended",
+        "plugin:node/recommended",
+        "plugin:jsdoc/recommended"
+    ],
+    "parserOptions": {
+        "ecmaVersion": 12
+    },
+    "rules": {
+        "indent": [
+            "error",
+            4,
+            {
+                "SwitchCase": 1
+            }
+        ],
+        "no-trailing-spaces": "error",
+        "no-unused-vars": "warn",
+        "no-console": "error",
+        "semi": [
+            "error",
+            "always"
+        ],
+        "jsdoc/no-undefined-types": 0,
+        "jsdoc/check-tag-names": "warn",
+        "jsdoc/require-param-description": 0,
+        "jsdoc/require-returns-description": 0
+    }
+}

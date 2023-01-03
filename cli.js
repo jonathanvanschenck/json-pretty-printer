@@ -1,16 +1,19 @@
-#! /usr/bin/env node
+#!/usr/bin/env node
+
+/* eslint-disable no-process-exit */
+/* eslint-disable no-console */
 
 const { resolve, dirname } = require("path");
 const { readFileSync, writeFileSync, mkdirSync } = require("fs");
 
-const { Parser, Renderer } = require("./index.js");
+const { JSONStream } = require("./index.js");
 
 const VERSION = require("./package.json").version;
 const HELP = `
 Pretty printing for JSON streams
 
 USAGE:
-    jsp [OPTIONS] INPUT
+    jcs [OPTIONS] INPUT
 
 INPUT:
     Either: A JSON string to pretty print
@@ -42,7 +45,7 @@ let colon = undefined;
 
 // Read off all the options
 let arg;
-let input
+let input;
 while ( args.length > 0 ) {
     switch (arg = args.shift()) {
         case "-f":
@@ -109,10 +112,12 @@ while ( args.length > 0 ) {
         case "--version":
             console.log(VERSION);
             process.exit(0);
+            break;
         case "-h":
         case "--help":
             console.log(HELP);
             process.exit(0);
+            break;
         default:
             if ( args.length > 0 ) {
                 console.error(`Unknown argument: ${arg}`);
@@ -166,26 +171,25 @@ if ( suppress_quotes !== undefined ) config.suppress_quotes = suppress_quotes;
 // Handle piped input
 if ( input == "-" ) {
 
-    let p = new Parser();
-    let r = new Renderer(config);
-    p.on("token", (token) => r.render_token(token));
-    r.on("data", (string) => process.stdout.write(string));
+    let js = new JSONStream(config);
+    js.on("data", (string) => process.stdout.write(string));
 
     process.stdin.setEncoding('utf8');
     process.stdin.on('readable', () => {
         const chunk = process.stdin.read();
-        if (chunk !== null) p.write(chunk);
+        if (chunk !== null) js.write(chunk);
     });
     process.stdin.on('end', () => {
-        p.end().then(() => {
+        js.end().then(() => {
             process.exit(0);
         });
     });
 } else {
     // Handle non-piped input
-    let p = new Parser();
-    let r = new Renderer(config);
-    p.on("token", (token) => r.render_token(token));
-    r.on("data", (string) => process.stdout.write(string));
-    p.end(input);
+    let js = new JSONStream(config);
+    js.on("data", (string) => process.stdout.write(string));
+    js.end(input);
 }
+
+/* eslint-enable no-process-exit */
+/* eslint-enable no-console */
