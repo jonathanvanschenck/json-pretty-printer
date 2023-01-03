@@ -1,4 +1,8 @@
-# JSON Color Stream
+# JSON Pretty Printer (DEPRECATED)
+
+**This Package has been deprecated** Please see [json-color-stream](https://github.com/jonathanvanschenck/json-color-stream) for updates
+
+
 A stream parser for pretty printing for JSON!
 
 A no-nonsense, low-dependancy, stream API for converting nasty and fragmented JSON strings into beautiful, cannonicalized outputs
